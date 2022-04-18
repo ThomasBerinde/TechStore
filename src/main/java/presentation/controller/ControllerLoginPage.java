@@ -1,9 +1,7 @@
 package presentation.controller;
 
 import bll.credentials.CredentialsCheck;
-import dao.DataAccessObject;
 import dao.FieldsException;
-import model.Client;
 import model.Credentials;
 import presentation.AdminPage;
 import presentation.ClientPage;
@@ -17,13 +15,9 @@ import java.awt.event.ActionListener;
 public class ControllerLoginPage implements ActionListener {
 
     private final LoginPage LOGIN_PAGE;
-//    private final DataAccessObject<Credentials> CREDENTIALS_DAO;
-//    private final DataAccessObject<Client> CLIENT_DAO;
 
     public ControllerLoginPage(LoginPage loginPage) {
         this.LOGIN_PAGE = loginPage;
-//        this.CREDENTIALS_DAO = new DataAccessObject<>(Credentials.class);
-//        this.CLIENT_DAO = new DataAccessObject<>(Client.class);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -74,8 +68,7 @@ public class ControllerLoginPage implements ActionListener {
 
         }
         else if (e.getSource() == LOGIN_PAGE.getRegisterButton()) {
-            RegistrationPage registrationPage = new RegistrationPage();
-            LOGIN_PAGE.getFrame().dispose();
+            RegistrationPage registrationPage = new RegistrationPage(this.LOGIN_PAGE);
         }
     }
 }

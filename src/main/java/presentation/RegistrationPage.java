@@ -1,12 +1,9 @@
 package presentation;
 
-import model.Credentials;
 import presentation.controller.ControllerRegistrationPage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class RegistrationPage {
 
@@ -33,14 +30,18 @@ public class RegistrationPage {
     private JPanel registrationPanel;
     private JButton registrationButton;
 
+    private final LoginPage LOGIN_PAGE;
     private final ControllerRegistrationPage controller = new ControllerRegistrationPage(this);
 
-    public RegistrationPage() {
+    public RegistrationPage(LoginPage loginPage) {
+
+        this.LOGIN_PAGE = loginPage;
 
         frame = new JFrame("Registration Page");
+        frame.addWindowListener(controller);
         frame.setSize(175, 420);
         frame.setLayout(new GridLayout(7, 1));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         usernameTextField = Utilities.makeTextField("");
         usernamePanel = Utilities.makePanel(Color.lightGray, "USERNAME: ", usernameTextField, FlowLayout.LEADING);
@@ -60,7 +61,7 @@ public class RegistrationPage {
         ageTextField = Utilities.makeTextField("");
         agePanel = Utilities.makePanel(Color.lightGray, "AGE: ", ageTextField, FlowLayout.LEADING);
 
-        registrationButton = Utilities.makeButton(Color.cyan, "REGISTER");
+        registrationButton = Utilities.makeButton(Color.green, "REGISTER");
         registrationButton.addActionListener(controller);
         registrationPanel = Utilities.makePanel(Color.lightGray, "", registrationButton, FlowLayout.CENTER);
 
@@ -193,5 +194,13 @@ public class RegistrationPage {
 
     public void setRegistrationButton(JButton registrationButton) {
         this.registrationButton = registrationButton;
+    }
+
+    public LoginPage getLOGIN_PAGE() {
+        return LOGIN_PAGE;
+    }
+
+    public ControllerRegistrationPage getController() {
+        return controller;
     }
 }

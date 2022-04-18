@@ -24,7 +24,7 @@ public class DataAccessObject <T> {
         this.TYPE = type;//(Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    public int insert(@NotNull T object) throws FieldsException {
+    public int insert(@NotNull T object) throws FieldsException, SQLException {
 
         Connection connection = null;
         Statement statement = null;
@@ -62,10 +62,6 @@ public class DataAccessObject <T> {
             connection = DatabaseConnection.getConnection();
             statement = connection.createStatement();
             status = statement.executeUpdate(insertQuery.toString());
-
-        } catch (SQLException e) {
-            LOGGER.log(Level.WARNING, TYPE.getName() + "DataAccessObject: insert " + e.getMessage());
-            e.printStackTrace();
 
         } finally {
             DatabaseConnection.close(statement);

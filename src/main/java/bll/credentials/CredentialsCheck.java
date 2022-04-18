@@ -1,5 +1,6 @@
 package bll.credentials;
 
+import bll.ValidationException;
 import dao.DataAccessObject;
 import dao.FieldsException;
 import model.Credentials;

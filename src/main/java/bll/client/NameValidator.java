@@ -1,5 +1,6 @@
 package bll.client;
 
+import bll.ValidationException;
 import dao.FieldsException;
 import model.Client;
 
@@ -14,16 +15,16 @@ public class NameValidator {
      * */
     private static final String NAME_PATTERN = "^([a-zA-Z][\\.\\s\\-]{0,1})*$";
 
-    public static void validate(String name) throws FieldsException {
+    public static void validate(String name) throws ValidationException {
         if (name.length() > 50) {
-            throw new FieldsException("Name is too long!");
+            throw new ValidationException("Name is too long!");
         }
         else if (name.length() < 6) {
-            throw new FieldsException("Name is too short");
+            throw new ValidationException("Name is too short");
         }
         Pattern pattern = Pattern.compile(NAME_PATTERN);
         if (!pattern.matcher(name).matches()) {
-            throw new FieldsException("Name is not valid!");
+            throw new ValidationException("Name is not valid!");
         }
     }
 }

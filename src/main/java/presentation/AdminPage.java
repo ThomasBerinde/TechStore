@@ -18,6 +18,8 @@ public class AdminPage {
     private JButton deleteItemButton;
     private JButton updateItemButton;
     private JButton insertItemButton;
+    private JButton logoutButton;
+    private JPanel menuFooterPanel;
 
     private final ControllerAdminPage controller = new ControllerAdminPage(this);
 
@@ -32,6 +34,7 @@ public class AdminPage {
         borderLayoutPanel = new JPanel();
         borderLayoutPanel.setLayout(new BorderLayout());
         borderLayoutPanel.setPreferredSize(new Dimension(550, frame.getHeight()));
+        borderLayoutPanel.setBorder(BorderFactory.createEtchedBorder());
 
         /** Title panel */
         titlePanel = Utilities.makePanel(Color.cyan, "", null, FlowLayout.CENTER);
@@ -70,6 +73,17 @@ public class AdminPage {
 
         /** Initialize items */
         controller.initializeItems();
+
+        /** Menu footer panel */
+        menuFooterPanel = Utilities.makePanel(Color.gray, "", null, FlowLayout.CENTER);
+
+        /** Log out button */
+        logoutButton = Utilities.makeButton(Color.red, "LOG OUT");
+        logoutButton.addActionListener(controller);
+
+        /** Menu footer panel */
+        menuFooterPanel.add(logoutButton);
+        menuPanel.add(menuFooterPanel, BorderLayout.SOUTH);
 
         buttonsPanel.add(switchPageButton);
         buttonsPanel.add(deleteItemButton);
@@ -174,5 +188,21 @@ public class AdminPage {
 
     public void setInsertItemButton(JButton insertItemButton) {
         this.insertItemButton = insertItemButton;
+    }
+
+    public JButton getLogoutButton() {
+        return logoutButton;
+    }
+
+    public void setLogoutButton(JButton logoutButton) {
+        this.logoutButton = logoutButton;
+    }
+
+    public JPanel getMenuFooterPanel() {
+        return menuFooterPanel;
+    }
+
+    public void setMenuFooterPanel(JPanel menuFooterPanel) {
+        this.menuFooterPanel = menuFooterPanel;
     }
 }

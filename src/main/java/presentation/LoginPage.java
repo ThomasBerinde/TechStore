@@ -37,7 +37,7 @@ public class LoginPage  {
 
         loginButton = Utilities.makeButton(Color.green, "LOGIN");
         loginButton.addActionListener(controller);
-        registerButton = Utilities.makeButton(Color.lightGray, "REGISTER");
+        registerButton = Utilities.makeButton(Color.green, "REGISTER");
         registerButton.addActionListener(controller);
 
         usernamePanel = Utilities.makePanel(Color.lightGray, "USER  ", usernameTextField, FlowLayout.LEADING);

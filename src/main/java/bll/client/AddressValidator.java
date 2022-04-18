@@ -1,5 +1,6 @@
 package bll.client;
 
+import bll.ValidationException;
 import dao.FieldsException;
 import model.Client;
 
@@ -14,16 +15,16 @@ public class AddressValidator {
     private static final String ADDRESS_PATTERN =
             "^(((?i)(str){0,1})\\.{0,1}\\s+){0,1}(\\b\\w*\\b\\s+){1,3}((?i)((nr){0,1})\\.{0,1}\\s+)*\\d{1,5}$";
 
-    public static void validate(String address) throws FieldsException {
+    public static void validate(String address) throws ValidationException {
         if (address.length() > 100) {
-            throw new FieldsException("Address is too long!");
+            throw new ValidationException("Address is too long!");
         }
         else if (address.length() < 4) {
-            throw new FieldsException("Address is too short");
+            throw new ValidationException("Address is too short");
         }
         Pattern pattern = Pattern.compile(ADDRESS_PATTERN);
         if (!pattern.matcher(address).matches()) {
-            throw new FieldsException("Address is not valid!");
+            throw new ValidationException("Address is not valid!");
         }
     }
 }

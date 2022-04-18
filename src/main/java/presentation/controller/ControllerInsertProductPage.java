@@ -1,20 +1,17 @@
 package presentation.controller;
 
-import dao.DataAccessObject;
 import dao.FieldsException;
-import model.Id;
 import model.Product;
 import presentation.InsertProductPage;
-import presentation.Utilities;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.List;
+import java.sql.SQLException;
 
-public class ControllerInsertProductPage implements ActionListener/*, WindowListener*/{
+public class ControllerInsertProductPage implements ActionListener, WindowListener{
 
     public final InsertProductPage INSERT_PRODUCT_PAGE;
 
@@ -57,7 +54,7 @@ public class ControllerInsertProductPage implements ActionListener/*, WindowList
 
                 INSERT_PRODUCT_PAGE.getADMIN_PAGE().getController().reloadTable();
 
-            } catch (FieldsException ex) {
+            } catch (FieldsException | SQLException ex) {
                 JOptionPane.showMessageDialog(
                         INSERT_PRODUCT_PAGE.getFrame(),
                         "Could not add product. Please try again later",
@@ -68,41 +65,28 @@ public class ControllerInsertProductPage implements ActionListener/*, WindowList
         }
     }
 
-/*    @Override
+    @Override
     public void windowOpened(WindowEvent e) {
-        INSERT_PRODUCT_PAGE.getADMIN_PAGE().getFrame().invalidate();
+        this.INSERT_PRODUCT_PAGE.getADMIN_PAGE().getFrame().setEnabled(false);
     }
 
     @Override
     public void windowClosing(WindowEvent e) {
-
+        this.INSERT_PRODUCT_PAGE.getADMIN_PAGE().getFrame().setEnabled(true);
     }
 
     @Override
-    public void windowClosed(WindowEvent e) {
-
-        if (e.getSource() == INSERT_PRODUCT_PAGE) {
-            INSERT_PRODUCT_PAGE.getADMIN_PAGE().getFrame().revalidate();
-        }
-    }
+    public void windowClosed(WindowEvent e) {}
 
     @Override
-    public void windowIconified(WindowEvent e) {
-
-    }
+    public void windowIconified(WindowEvent e) {}
 
     @Override
-    public void windowDeiconified(WindowEvent e) {
-
-    }
+    public void windowDeiconified(WindowEvent e) {}
 
     @Override
-    public void windowActivated(WindowEvent e) {
-
-    }
+    public void windowActivated(WindowEvent e) {}
 
     @Override
-    public void windowDeactivated(WindowEvent e) {
-
-    }*/
+    public void windowDeactivated(WindowEvent e) {}
 }

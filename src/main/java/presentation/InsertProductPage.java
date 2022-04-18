@@ -35,7 +35,7 @@ public class InsertProductPage {
         frame.setLayout(new BorderLayout());
         frame.setSize(new Dimension(175, 275));
         frame.setResizable(false);
-//        frame.addWindowListener(controller);
+        frame.addWindowListener(controller);
 
         titlePanel = Utilities.makePanel(Color.cyan, "Add product", null, FlowLayout.CENTER);
         contentPanel = Utilities.makePanel(Color.lightGray, "", null, FlowLayout.LEADING);

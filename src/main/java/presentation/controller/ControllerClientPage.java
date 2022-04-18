@@ -4,10 +4,12 @@ import dao.DataAccessObject;
 import dao.FieldsException;
 import model.Order;
 import presentation.ClientPage;
+import presentation.LoginPage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class ControllerClientPage implements ActionListener {
 
@@ -63,7 +65,7 @@ public class ControllerClientPage implements ActionListener {
                                     Long.parseLong(productId)
                             )
                     );
-                } catch (FieldsException ex) {
+                } catch (FieldsException | SQLException ex) {
                     JOptionPane.showMessageDialog(
                             CLIENT_PAGE.getFrame(),
                             "Order failed. Please try again later",
@@ -81,6 +83,11 @@ public class ControllerClientPage implements ActionListener {
                         JOptionPane.INFORMATION_MESSAGE
                 );
             }
+        }
+        else if (e.getSource() == CLIENT_PAGE.getLogoutButton()) {
+
+            CLIENT_PAGE.getFrame().dispose();
+            LoginPage loginPage = new LoginPage();
         }
     }
 }

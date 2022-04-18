@@ -8,11 +8,9 @@ import model.Id;
 import model.Product;
 import org.jetbrains.annotations.NotNull;
 
-import javax.print.attribute.standard.PDLOverrideSupported;
-import javax.xml.crypto.Data;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class DatabaseOperation {
 
@@ -102,7 +100,7 @@ public class DatabaseOperation {
         dao.update(fieldName, fieldValue, client);
     }
 
-    public static void insertProduct(@NotNull Product product) throws FieldsException {
+    public static void insertProduct(@NotNull Product product) throws FieldsException, SQLException {
         DataAccessObject<Product> dao = new DataAccessObject<>(Product.class);
         dao.insert(product);
     }

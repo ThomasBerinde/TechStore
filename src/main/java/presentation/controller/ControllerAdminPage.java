@@ -1,16 +1,10 @@
 package presentation.controller;
 
-import com.mysql.cj.conf.url.XDevApiDnsSrvConnectionUrl;
-import com.mysql.cj.xdevapi.AddResultImpl;
 import dao.FieldsException;
 import model.Product;
-import presentation.AdminPage;
-import presentation.ClientPage;
-import presentation.InsertProductPage;
-import presentation.Utilities;
+import presentation.*;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -92,7 +86,7 @@ public class ControllerAdminPage implements ActionListener {
 
         if (items.equals(Items.CLIENTS)) {
             /** Switch page button */
-            ADMIN_PAGE.getSwitchPageButton().setText("PRODUCTS");
+            ADMIN_PAGE.getSwitchPageButton().setText("CLIENTS");
 
             /** Table */
             if (productTable != null) {
@@ -123,7 +117,7 @@ public class ControllerAdminPage implements ActionListener {
         }
         else if (items.equals(Items.PRODUCTS)) {
             /** Switch page button */
-            ADMIN_PAGE.getSwitchPageButton().setText("CLIENTS");
+            ADMIN_PAGE.getSwitchPageButton().setText("PRODUCTS");
 
             /** Table */
             if (clientTable != null) {
@@ -256,7 +250,12 @@ public class ControllerAdminPage implements ActionListener {
         }
         else if (e.getSource() == ADMIN_PAGE.getInsertItemButton()) {
             InsertProductPage insertProductPage = new InsertProductPage(ADMIN_PAGE);
-        } // end of source event
+        }
+        else if (e.getSource() == ADMIN_PAGE.getLogoutButton()) {
+
+            ADMIN_PAGE.getFrame().dispose();
+            LoginPage loginPage = new LoginPage();
+        }// end of source event
 
     } // end of action performed method
 

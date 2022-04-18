@@ -18,6 +18,8 @@ public class ClientPage {
     private JButton orderButton;
     private JPanel borderLayoutPanel;
     private JScrollPane scrollPane;
+    private JButton logoutButton;
+    private JPanel menuFooterPanel;
 
     private final Credentials credentials;
     private final String[] columns = {"product_id", "product_name", "product_price", "product_category"};
@@ -47,6 +49,7 @@ public class ClientPage {
         borderLayoutPanel = new JPanel();
         borderLayoutPanel.setLayout(new BorderLayout());
         borderLayoutPanel.setPreferredSize(new Dimension(550, frame.getHeight()));
+        borderLayoutPanel.setBorder(BorderFactory.createEtchedBorder());
 
         /** Title panel */
         titlePanel = Utilities.makePanel(Color.cyan, "Products", null, FlowLayout.CENTER);
@@ -71,6 +74,15 @@ public class ClientPage {
         orderButton = Utilities.makeButton(Color.cyan, "ORDER");
         orderButton.addActionListener(controller);
 
+        /** Menu footer panel */
+        menuFooterPanel = Utilities.makePanel(Color.gray, "", null, FlowLayout.CENTER);
+
+        /** Log out button */
+        logoutButton = Utilities.makeButton(Color.red, "LOG OUT");
+        logoutButton.addActionListener(controller);
+
+        menuFooterPanel.add(logoutButton);
+        menuPanel.add(menuFooterPanel, BorderLayout.SOUTH);
         buttonsPanel.add(orderButton);
         frame.add(menuPanel, BorderLayout.CENTER);
         frame.add(borderLayoutPanel, BorderLayout.EAST);
@@ -146,5 +158,21 @@ public class ClientPage {
 
     public Credentials getCredentials() {
         return credentials;
+    }
+
+    public JScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
+    public void setScrollPane(JScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
+    }
+
+    public JButton getLogoutButton() {
+        return logoutButton;
+    }
+
+    public void setLogoutButton(JButton logoutButton) {
+        this.logoutButton = logoutButton;
     }
 }
