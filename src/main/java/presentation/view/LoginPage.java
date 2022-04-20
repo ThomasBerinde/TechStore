@@ -1,5 +1,6 @@
-package presentation;
+package presentation.view;
 
+import presentation.Utilities;
 import presentation.controller.ControllerLoginPage;
 
 import javax.swing.*;

@@ -1,5 +1,8 @@
 package dao;
 
+import exceptions.FieldsException;
+import exceptions.ModelClassException;
+import exceptions.QueryException;
 import org.jetbrains.annotations.NotNull;
 
 import java.beans.IntrospectionException;

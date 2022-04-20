@@ -1,8 +1,8 @@
 package presentation.controller;
 
-import dao.FieldsException;
+import exceptions.FieldsException;
 import model.Product;
-import presentation.InsertProductPage;
+import presentation.view.InsertProductPage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

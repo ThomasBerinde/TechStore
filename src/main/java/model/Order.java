@@ -1,5 +1,15 @@
 package model;
 
+/**
+ * Represents an order that a client can make at the store.
+ * It is directly linked to the table "order" in the "techstore" database.
+ *
+ * Conditions for the proper functionality of the project:
+ *  - the class and the respective table must have the same fields and data types.
+ *  - the class must have getters and setters for all attributes
+ *  - the class' name and the table's name must be the same (case-insensitive)
+ *  - the class must have an empty constructor
+ */
 public class Order {
 
     private Long id;

@@ -1,6 +1,6 @@
 package bll.credentials;
 
-import bll.ValidationException;
+import exceptions.ValidationException;
 
 import java.util.regex.Pattern;
 

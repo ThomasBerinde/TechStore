@@ -1,16 +1,16 @@
 package presentation.controller;
 
-import bll.ValidationException;
+import exceptions.ValidationException;
 import bll.client.AddressValidator;
 import bll.client.AgeValidator;
 import bll.client.NameValidator;
 import bll.credentials.PasswordValidator;
 import bll.credentials.UsernameValidator;
 import dao.DataAccessObject;
-import dao.FieldsException;
+import exceptions.FieldsException;
 import model.Client;
 import model.Credentials;
-import presentation.RegistrationPage;
+import presentation.view.RegistrationPage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

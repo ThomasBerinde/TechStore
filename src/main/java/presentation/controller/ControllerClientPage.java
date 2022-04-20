@@ -1,14 +1,19 @@
 package presentation.controller;
 
+import com.itextpdf.text.DocumentException;
 import dao.DataAccessObject;
-import dao.FieldsException;
+import exceptions.FieldsException;
+import model.Client;
 import model.Order;
-import presentation.ClientPage;
-import presentation.LoginPage;
+import model.Product;
+import presentation.view.ClientPage;
+import presentation.view.LoginPage;
+import presentation.Utilities;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
 public class ControllerClientPage implements ActionListener {
@@ -45,6 +50,10 @@ public class ControllerClientPage implements ActionListener {
             }
             else {
 
+                Client client;
+                Product product;
+                Order order;
+
                 String productName =
                         (String) CLIENT_PAGE
                                 .getProductsTable()
@@ -57,14 +66,25 @@ public class ControllerClientPage implements ActionListener {
                                 .getValueAt(selectedRows[0], 0);
 
                 try {
+                    client = (new DataAccessObject<>(Client.class))
+                            .findById(CLIENT_PAGE.getCredentials().getId().toString());
+
+                    product = (new DataAccessObject<>(Product.class))
+                            .findById(productId);
+
                     Long id = DatabaseOperation.getNextId(new Order());
-                    ORDER_DAO.insert(
-                            new Order(
-                                    id,
-                                    CLIENT_PAGE.getCredentials().getId(),
-                                    Long.parseLong(productId)
-                            )
+                    order = new Order(id, CLIENT_PAGE.getCredentials().getId(), Long.parseLong(productId));
+                    ORDER_DAO.insert(order);
+
+                    Utilities.generateInvoice(client, product, order);
+
+                    JOptionPane.showMessageDialog(
+                            CLIENT_PAGE.getFrame(),
+                            "You have ordered one " + productName,
+                            "Order successful",
+                            JOptionPane.INFORMATION_MESSAGE
                     );
+
                 } catch (FieldsException | SQLException ex) {
                     JOptionPane.showMessageDialog(
                             CLIENT_PAGE.getFrame(),
@@ -73,15 +93,16 @@ public class ControllerClientPage implements ActionListener {
                             JOptionPane.ERROR_MESSAGE
                     );
                     ex.printStackTrace();
-                    return;
-                }
 
-                JOptionPane.showMessageDialog(
-                        CLIENT_PAGE.getFrame(),
-                        "You have ordered one " + productName,
-                        "Order successful",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
+                } catch (FileNotFoundException | DocumentException ex) {
+                    JOptionPane.showMessageDialog(
+                            CLIENT_PAGE.getFrame(),
+                            "Order succeeded. Could not create create invoice.",
+                            "Unexpected error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    ex.printStackTrace();
+                }
             }
         }
         else if (e.getSource() == CLIENT_PAGE.getLogoutButton()) {

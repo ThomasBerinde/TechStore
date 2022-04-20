@@ -1,5 +1,6 @@
-package presentation;
+package presentation.view;
 
+import presentation.Utilities;
 import presentation.controller.ControllerRegistrationPage;
 
 import javax.swing.*;

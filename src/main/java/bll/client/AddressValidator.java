@@ -1,8 +1,6 @@
 package bll.client;
 
-import bll.ValidationException;
-import dao.FieldsException;
-import model.Client;
+import exceptions.ValidationException;
 
 import java.util.regex.Pattern;
 

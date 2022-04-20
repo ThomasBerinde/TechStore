@@ -1,7 +1,15 @@
 package model;
 
-
-
+/**
+ * Represents a product that can be bought at the store
+ * It is directly linked to the table "product" in the "techstore" database.
+ *
+ * Conditions for the proper functionality of the project:
+ *  - the class and the respective table must have the same fields and data types.
+ *  - the class must have getters and setters for all attributes
+ *  - the class' name and the table's name must be the same (case-insensitive)
+ *  - the class must have an empty constructor
+ */
 public class Product {
 
     private Long id;
@@ -18,13 +26,9 @@ public class Product {
         this.category = category;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() {return id;}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) {this.id = id;}
 
     public String getName() {
         return name;
@@ -34,13 +38,9 @@ public class Product {
         this.name = name;
     }
 
-    public Long getPrice() {
-        return price;
-    }
+    public Long getPrice() {return price;}
 
-    public void setPrice(Long price) {
-        this.price = price;
-    }
+    public void setPrice(Long price) {this.price = price;}
 
     public String getCategory() {
         return category;

@@ -1,12 +1,12 @@
 package presentation.controller;
 
 import bll.credentials.CredentialsCheck;
-import dao.FieldsException;
+import exceptions.CredentialException;
 import model.Credentials;
-import presentation.AdminPage;
-import presentation.ClientPage;
-import presentation.LoginPage;
-import presentation.RegistrationPage;
+import presentation.view.AdminPage;
+import presentation.view.ClientPage;
+import presentation.view.LoginPage;
+import presentation.view.RegistrationPage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -49,7 +49,7 @@ public class ControllerLoginPage implements ActionListener {
 
             try {
                 userId = CredentialsCheck.check(credentials);
-            } catch (FieldsException ex) {
+            } catch (CredentialException ex) {
                 JOptionPane.showMessageDialog(
                         LOGIN_PAGE.getFrame(),
                         ex.getMessage(),

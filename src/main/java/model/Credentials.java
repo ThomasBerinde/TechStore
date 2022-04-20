@@ -1,5 +1,15 @@
 package model;
 
+/**
+ * Represents a set of credentials of a client.
+ * It is directly linked to the table "credentials" in the "techstore" database.
+ *
+ * Conditions for the proper functionality of the project:
+ *  - the class and the respective table must have the same fields and data types.
+ *  - the class must have getters and setters for all attributes
+ *  - the class' name and the table's name must be the same (case-insensitive)
+ *  - the class must have an empty constructor
+ */
 public class Credentials {
 
     private Long id;

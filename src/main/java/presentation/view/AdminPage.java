@@ -1,49 +1,35 @@
-package presentation;
+package presentation.view;
 
-import dao.FieldsException;
-import model.Credentials;
-import presentation.controller.ControllerClientPage;
-import presentation.controller.DatabaseOperation;
+import presentation.Utilities;
+import presentation.controller.ControllerAdminPage;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ClientPage {
+public class AdminPage {
 
     private JFrame frame;
-    private JTable productsTable;
+    private JTable table;
     private JPanel titlePanel;
     private JPanel menuPanel;
     private JPanel buttonsPanel;
-    private JButton orderButton;
+    private JButton switchPageButton;
     private JPanel borderLayoutPanel;
     private JScrollPane scrollPane;
+    private JButton deleteItemButton;
+    private JButton updateItemButton;
+    private JButton insertItemButton;
     private JButton logoutButton;
     private JPanel menuFooterPanel;
 
-    private final Credentials credentials;
-    private final String[] columns = {"product_id", "product_name", "product_price", "product_category"};
-    private final ControllerClientPage controller = new ControllerClientPage(this);
+    private final ControllerAdminPage controller = new ControllerAdminPage(this);
 
-    public ClientPage(Credentials credentials) {
+    public AdminPage() {
 
-        this.credentials = credentials;
-        frame = new JFrame("TechStore (user: " + credentials.getUsername() + ", id: " + credentials.getId() + ")");
+        frame = new JFrame("TechStore (user: admin, id: 1)");
         frame.setSize(new Dimension(700, 500));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-
-        /** Products table */
-        try {
-            productsTable = new JTable(DatabaseOperation.getProducts(), columns);
-        } catch (FieldsException e) {
-            JOptionPane.showMessageDialog(
-                    frame,
-                    "There are currently no products in the store",
-                    "Empty store",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
-        }
 
         /** Border layout panel */
         borderLayoutPanel = new JPanel();
@@ -52,17 +38,20 @@ public class ClientPage {
         borderLayoutPanel.setBorder(BorderFactory.createEtchedBorder());
 
         /** Title panel */
-        titlePanel = Utilities.makePanel(Color.cyan, "Products", null, FlowLayout.CENTER);
+        titlePanel = Utilities.makePanel(Color.cyan, "", null, FlowLayout.CENTER);
         titlePanel.setPreferredSize(new Dimension(700, 25));
 
         /** Scroll pane */
-        scrollPane = new JScrollPane(productsTable); // displays the product table as a scrollable object
+        scrollPane = new JScrollPane(table);
         scrollPane.setBackground(Color.white);
 
         /** Menu panel*/
         menuPanel = new JPanel();
         menuPanel.setLayout(new BorderLayout());
-        menuPanel.add(new JLabel("Menu"), BorderLayout.NORTH);
+        menuPanel.add(
+                Utilities.makePanel(Color.cyan, "Menu", null, FlowLayout.CENTER),
+                BorderLayout.NORTH
+        );
         menuPanel.setPreferredSize(new Dimension(150, frame.getHeight()));
         menuPanel.setBorder(BorderFactory.createEtchedBorder());
 
@@ -71,8 +60,23 @@ public class ClientPage {
         buttonsPanel.setPreferredSize(new Dimension(700, 35));
 
         /** Order button */
-        orderButton = Utilities.makeButton(Color.cyan, "ORDER");
-        orderButton.addActionListener(controller);
+        switchPageButton = Utilities.makeButton(Color.cyan, "");
+        switchPageButton.addActionListener(controller);
+
+        /** Delete item button */
+        deleteItemButton = Utilities.makeButton(Color.cyan, "DELETE");
+        deleteItemButton.addActionListener(controller);
+
+        /** Update item button */
+        updateItemButton = Utilities.makeButton(Color.cyan, "UPDATE");
+        updateItemButton.addActionListener(controller);
+
+        /** Insert item button */
+        insertItemButton = Utilities.makeButton(Color.cyan, "INSERT");
+        insertItemButton.addActionListener(controller);
+
+        /** Initialize items */
+        controller.initializeItems();
 
         /** Menu footer panel */
         menuFooterPanel = Utilities.makePanel(Color.gray, "", null, FlowLayout.CENTER);
@@ -81,9 +85,15 @@ public class ClientPage {
         logoutButton = Utilities.makeButton(Color.red, "LOG OUT");
         logoutButton.addActionListener(controller);
 
+        /** Menu footer panel */
         menuFooterPanel.add(logoutButton);
         menuPanel.add(menuFooterPanel, BorderLayout.SOUTH);
-        buttonsPanel.add(orderButton);
+
+        buttonsPanel.add(switchPageButton);
+        buttonsPanel.add(deleteItemButton);
+        buttonsPanel.add(updateItemButton);
+        buttonsPanel.add(insertItemButton);
+
         frame.add(menuPanel, BorderLayout.CENTER);
         frame.add(borderLayoutPanel, BorderLayout.EAST);
         borderLayoutPanel.add(buttonsPanel, BorderLayout.SOUTH);
@@ -100,16 +110,12 @@ public class ClientPage {
         this.frame = frame;
     }
 
-    public JTable getProductsTable() {
-        return productsTable;
+    public JTable getTable() {
+        return table;
     }
 
-    public void setProductsTable(JTable productsTable) {
-        this.productsTable = productsTable;
-    }
-
-    public ControllerClientPage getController() {
-        return controller;
+    public void setTable(JTable table) {
+        this.table = table;
     }
 
     public JPanel getTitlePanel() {
@@ -136,16 +142,12 @@ public class ClientPage {
         this.buttonsPanel = buttonsPanel;
     }
 
-    public JButton getOrderButton() {
-        return orderButton;
+    public JButton getSwitchPageButton() {
+        return switchPageButton;
     }
 
-    public void setOrderButton(JButton orderButton) {
-        this.orderButton = orderButton;
-    }
-
-    public String[] getColumns() {
-        return columns;
+    public void setSwitchPageButton(JButton switchPageButton) {
+        this.switchPageButton = switchPageButton;
     }
 
     public JPanel getBorderLayoutPanel() {
@@ -156,8 +158,8 @@ public class ClientPage {
         this.borderLayoutPanel = borderLayoutPanel;
     }
 
-    public Credentials getCredentials() {
-        return credentials;
+    public ControllerAdminPage getController() {
+        return controller;
     }
 
     public JScrollPane getScrollPane() {
@@ -168,11 +170,43 @@ public class ClientPage {
         this.scrollPane = scrollPane;
     }
 
+    public JButton getDeleteItemButton() {
+        return deleteItemButton;
+    }
+
+    public void setDeleteItemButton(JButton deleteItemButton) {
+        this.deleteItemButton = deleteItemButton;
+    }
+
+    public JButton getUpdateItemButton() {
+        return updateItemButton;
+    }
+
+    public void setUpdateItemButton(JButton updateItemButton) {
+        this.updateItemButton = updateItemButton;
+    }
+
+    public JButton getInsertItemButton() {
+        return insertItemButton;
+    }
+
+    public void setInsertItemButton(JButton insertItemButton) {
+        this.insertItemButton = insertItemButton;
+    }
+
     public JButton getLogoutButton() {
         return logoutButton;
     }
 
     public void setLogoutButton(JButton logoutButton) {
         this.logoutButton = logoutButton;
+    }
+
+    public JPanel getMenuFooterPanel() {
+        return menuFooterPanel;
+    }
+
+    public void setMenuFooterPanel(JPanel menuFooterPanel) {
+        this.menuFooterPanel = menuFooterPanel;
     }
 }

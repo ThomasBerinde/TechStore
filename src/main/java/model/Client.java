@@ -1,5 +1,15 @@
 package model;
 
+/**
+ * Represents a client of the store.
+ * It is directly linked to the table "client" in the "techstore" database.
+ *
+ * Conditions for the proper functionality of the project:
+ *  - the class and the respective table must have the same fields and data types.
+ *  - the class must have getters and setters for all attributes
+ *  - the class' name and the table's name must be the same (case-insensitive)
+ *  - the class must have an empty constructor
+ */
 public class Client {
 
     private Long id;
@@ -32,13 +42,9 @@ public class Client {
         this.name = name;
     }
 
-    public Long getAge() {
-        return age;
-    }
+    public Long getAge() {return age;}
 
-    public void setAge(Long age) {
-        this.age = age;
-    }
+    public void setAge(Long age) {this.age = age;}
 
     public String getAddress() {
         return address;

@@ -1,4 +1,4 @@
-package dao;
+package exceptions;
 
 public class FieldsException extends Exception {
 

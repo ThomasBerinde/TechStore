@@ -1,6 +1,8 @@
-package presentation;
+package presentation.view;
 
+import presentation.Utilities;
 import presentation.controller.ControllerInsertProductPage;
+import presentation.view.AdminPage;
 
 import javax.swing.*;
 import java.awt.*;

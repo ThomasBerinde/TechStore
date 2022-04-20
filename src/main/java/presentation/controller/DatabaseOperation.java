@@ -1,7 +1,7 @@
 package presentation.controller;
 
 import dao.DataAccessObject;
-import dao.FieldsException;
+import exceptions.FieldsException;
 import model.Client;
 import model.Credentials;
 import model.Id;

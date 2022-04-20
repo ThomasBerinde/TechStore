@@ -1,8 +1,6 @@
 package bll.product;
 
-import bll.ValidationException;
-import dao.FieldsException;
-import model.Product;
+import exceptions.ValidationException;
 
 import java.util.regex.Pattern;
 
